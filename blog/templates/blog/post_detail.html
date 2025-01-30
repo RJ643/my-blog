@@ -100,7 +100,27 @@
                         <section class="mb-5">
                             <p class="fs-5 mb-4">{{ post.content }}</p>
                         </section>
+                        {% if post.file_upload %}
+                            <span class="fw-bold d-inline">첨부파일:</span>
+                            <a href="{{ post.file_upload.url }}" class="btn btn-outline-info" role="button">
+                              Download:
+
+                              {% if post.get_file_ext == 'csv' %}
+                                <i class="fas fa-file-csv"></i>
+                              {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                                <i class="fas fa-file-excel"></i>
+                              {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                                <i class="fas fa-file-word"></i>
+                              {% else %}
+                                <i class="far fa-file"></i>
+                              {% endif %}
+
+                              {{ post.get_file_name }}
+                            </a>
+                        {% endif %}
                     </article>
+                    <!-- spacing -->
+                    <hr>
                     <!-- Comments section-->
                     <section class="mb-5">
                         <div class="card bg-light">
