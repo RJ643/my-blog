@@ -70,16 +70,20 @@
                 <h2>최근 게시글</h2>
                 {% for p in post_list %}
                 <div class="card mb-3">
-                    <img src="{{ p.head_image.url }}" width="150" height="300" class="card-img-top" alt="Example Image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ p.title }}</h5>
-                        <p class="card-text">{{p.content}}</p>
-                        <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Learn More</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Posted on {{ p.created_at }} by
-                        <a href="#">작성자명</a>
-                    </div>
+                    {% if p.head_image %}
+                        <img src="{{ p.head_image.url }}" width="150" height="300" class="card-img-top" alt="{{ p }} head image">
+                    {% else %}
+                        <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/900/400" alt="random_image">
+                    {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ p.title }}</h5>
+                            <p class="card-text">{{p.content}}</p>
+                            <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Learn More</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Posted on {{ p.created_at }} by
+                            <a href="#">작성자명</a>
+                        </div>
                 </div>
                 {% endfor %}
 
