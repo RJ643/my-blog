@@ -70,7 +70,7 @@
                 <h2>최근 게시글</h2>
                 {% for p in post_list %}
                 <div class="card mb-3">
-                    <img src="/colosseum.jpg" width="150" height="300" class="card-img-top" alt="Example Image">
+                    <img src="{{ p.head_image.url }}" width="150" height="300" class="card-img-top" alt="Example Image">
                     <div class="card-body">
                         <h5 class="card-title">{{ p.title }}</h5>
                         <p class="card-text">{{p.content}}</p>
