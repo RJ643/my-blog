@@ -1,0 +1,51 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="{% static 'blog/changoimage.png' %}" alt="Logo" class="logo-image me-3">
+                <span class="brand-text">창고</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about_me/">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog/">Blog</a>
+                    </li>
+                </ul>
+                <!-- Log In 버튼 -->
+                <div class="d-flex align-items-center">
+                    <a class="nav-link btn btn-outline-primary" href="#" role="button" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel"><i class="fas fa-sign-in-alt"></i>&nbsp; 로그인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-outline-dark btn-lg"><i class="fab fa-google"></i>&nbsp; Log in with Google</button>
+                        <button type="button" class="btn btn-outline-dark btn-lg"><i class="far fa-envelope"></i>&nbsp; Log in with E-mail</button>
+                        <button type="button" class="btn btn-outline-dark btn-lg"><i class="far fa-envelope"></i>&nbsp; Sign Up with E-mail</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
