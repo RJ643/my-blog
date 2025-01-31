@@ -5,8 +5,15 @@
                     <article>
                         <!-- Post header-->
                         <header class="mb-4">
-                            <!-- Post title-->
-                            <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
+                            <div class="d-flex align-items-center justify-content-between">
+                             <!-- Post title-->
+                                <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
+                             {% if post.category %}
+                                <span class="badge bg-secondary ms-2 float-right"><h6>{{ post.category }}</h6></span>
+                             {% else %}
+                                <span class="badge bg-secondary ms-2 float-right"><h6>미분류</h6></span>
+                             {% endif %}
+                            </div>
                                 <li class="text-muted"><b>{{ post.hook_text }}</b></li>
                                 <!-- Post meta content-->
                             <!-- Author -->
