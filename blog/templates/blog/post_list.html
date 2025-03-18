@@ -1,15 +1,25 @@
 {% extends 'blog/base.html' %}
 {% block main_area %}
 
-<style>
-    .badge-secondary {
-        background-color: #6c757d !important;  /* ✅ 배경색 */
-        color: white !important;  /* ✅ 글자색 */
-        font-weight: bold;
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-</style>
+    <div class="d-flex justify-content-end">
+        {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
+                <a class="btn btn-outline-dark btn-sm" href="/blog/create_post/" role="button">
+                    <i class="fas fa-pen"></i>&nbsp;&nbsp;글쓰기
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <style>
+        .badge-secondary {
+            background-color: #6c757d !important;  /* ✅ 배경색 */
+            color: white !important;  /* ✅ 글자색 */
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
                 <h1>최근 게시글</h1>
             {% if post_list.exists %}
                 {% for p in post_list %}
@@ -63,10 +73,10 @@
                         <!-- Pagination -->
                 <ul class="pagination justify-content-center mb-4">
                     <li class="page-item">
-                        <a class="page-link" href="#">&larr; Older</a>
+                        <a class="page-link" href="#">&larr; 이전</a>
                     </li>
                     <li class="page-item disabled">
-                        <a class="page-link" href="#">Newer &rarr;</a>
+                        <a class="page-link" href="#">다음 &rarr;</a>
                     </li>
                 </ul>
 {% endblock %}
