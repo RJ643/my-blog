@@ -1,21 +1,32 @@
 {% extends 'blog/base.html' %}
-
 {% block main_area %}
-                <h1>최근 게시글{% if category %}<span class="badge badge-secondary">{{ category }}</span>{% endif %}</h1>
+
+<style>
+    .badge-secondary {
+        background-color: #6c757d !important;  /* ✅ 배경색 */
+        color: white !important;  /* ✅ 글자색 */
+        font-weight: bold;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+</style>
+                <h1>최근 게시글</h1>
             {% if post_list.exists %}
                 {% for p in post_list %}
-                <div class="card mb-3" id="post-{{ p.pk }}">
-                    {% if p.head_image %}
-                        <img src="{{ p.head_image.url }}" width="150" height="300" class="card-img-top" alt="{{ p }} head image">
-                    {% else %}
-                        <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/900/400" alt="random_image">
-                    {% endif %}
+                    <!-- Blog Post-->
+                    <div class="card mb-3" id="post-{{ p.pk }}">
+                        {% if p.head_image %}
+                            <img src="{{ p.head_image.url }}" width="150" height="300" class="card-img-top" alt="{{ p }} head image">
+                        {% else %}
+                            <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/900/400" alt="random_image">
+                        {% endif %}
                         <div class="card-body">
                             {% if p.category %}
                                 <span class="badge badge-secondary float-right">{{ p.category }}</span>
                             {% else %}
                                 <span class="badge badge-secondary float-right">미분류</span>
                             {% endif %}
+
                             <h2 class="card-title">{{ p.title }}</h2>
                             <hr>
                             {% if p.hook_text %}
@@ -23,13 +34,28 @@
                             {% endif %}
                             <hr>
                             <p class="card-text">{{p.content | truncatewords:45 }}</p>
+
+                           <!-- ✅ 태그 출력 (수량 포함) -->
+                            {% if p.tags.exists %}
+                                <i class="fas fa-tags"></i>
+                                {% for tag in p.tags.iterator %}
+                                    <a href="{{ tag.get_absolute_url }}">
+                                        <span class="badge badge-pill badge-light text-dark">{{ tag.name }} ({{ tag.post_set.count }})</span>
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="badge badge-pill badge-light text-dark">태그 없음</span>
+                            {% endif %}
+
+                            <br/><br/>
+
                             <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Learn More</a>
                         </div>
                         <div class="card-footer text-muted">
                             Posted on {{ p.created_at }} by
                             <a href="#">{{ p.author | upper }}</a>
                         </div>
-                </div>
+                    </div>
                 {% endfor %}
             {% else %}
                 <h3>아직 게시물이 없습니다.</h3>
