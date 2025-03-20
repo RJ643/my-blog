@@ -17,11 +17,20 @@
                                 <li class="text-muted"><b>{{ post.hook_text }}</b></li>
                                 <!-- Post meta content-->
                             <!-- Author -->
-                            <p class="lead">
-                                by <a href="#">{{ post.author | upper }}</a>
-                                <span class="text-muted fst-italic ms-2">{{ post.created_at }}</span>
-                            </p>
+                                <p class="lead d-flex align-items-center justify-content-between">
+                                    <span>
+                                        by <a href="#">{{ post.author | upper }}</a>
+                                        <span class="text-muted fst-italic ms-2">{{ post.created_at }}</span>
+                                    </span>
+
+                                    {% if user.is_authenticated and user == post.author %}
+                                        <a class="btn btn-outline-info btn-sm ms-auto" href="/blog/update_post/{{ post.pk }}/" role="button">
+                                            <i class="fas fa-pen"></i> 수정하기
+                                        </a>
+                                    {% endif %}
+                                </p>
                             <hr>
+
                         </header>
                         <!-- Preview image figure-->
                         <figure class="mb-4">
