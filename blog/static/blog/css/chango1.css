@@ -59,3 +59,16 @@
     border-radius: 10px; /* 모서리 둥글게 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
+
+/* 드롭다운 메뉴 크기 조정 */
+.dropdown-menu {
+    min-width: 60px;  /* 기본 크기보다 작게 */
+    padding: 4px 8px; /* 안쪽 여백 줄이기 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+/* 드롭다운 항목 스타일 */
+.dropdown-item {
+    padding: 6px 10px;  /* 항목 여백 조정 */
+    font-size: 14px;    /* 글자 크기 조정 */
+}

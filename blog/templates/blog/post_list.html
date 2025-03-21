@@ -43,7 +43,7 @@
                                 <h5 class="text-muted">{{ p.hook_text }}</h5>
                             {% endif %}
                             <hr>
-                            <p class="card-text">{{p.content | truncatewords:45 }}</p>
+                            <p class="card-text">{{p.get_content_markdown | truncatewords_html:45 | safe }}</p>
 
                            <!-- ✅ 태그 출력 (수량 포함) -->
                             {% if p.tags.exists %}

@@ -15,15 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
 
+def google_login_redirect(request):
+    return redirect('/accounts/google/login/?process=login')
+
 urlpatterns = [
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
+    path('markdownx/', include('markdownx.urls')),
+    path('accounts/login/', google_login_redirect),
+    path('accounts/', include('allauth.urls')),
     path('', include('single_pages.urls')),
+
 ]
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,10 +1,10 @@
 from django.core.handlers.exception import response_for_exception
-from django.shortcuts import render, redirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from traitlets.config.manager import recursive_update
 from django.utils.text import slugify
+from django.contrib.auth import logout
 
 from .models import Post, Category, Tag
 from django.core.exceptions import PermissionDenied
@@ -68,9 +68,9 @@ def tag_page(request, slug):
         }
     )
 
-class PostCreate(LoginRequiredMixin,UserPassesTestMixin,CreateView):
+class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title','hook_text','content','head_image','file_upload','category']
+    fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category']
 
     def test_func(self):
         return self.request.user.is_superuser or self.request.user.is_staff
@@ -79,25 +79,35 @@ class PostCreate(LoginRequiredMixin,UserPassesTestMixin,CreateView):
         current_user = self.request.user
         if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
             form.instance.author = current_user
-            response = super(PostCreate, self).form_valid(form)
+            response = super().form_valid(form)
 
             tags_str = self.request.POST.get('tags_str')
             if tags_str:
-                tags_str = tags_str.strip()
-
-                tags_str = tags_str.replace(',',';')
+                tags_str = tags_str.strip().replace(',', ';')  # 쉼표를 세미콜론으로 변환
                 tags_list = tags_str.split(';')
 
                 for t in tags_list:
                     t = t.strip()
-                    tag, is_tag_created = Tag.objects.get_or_create(name=t)
-                    if is_tag_created:
+                    tag, is_tag_created = Tag.objects.get_or_create(name=t)  # name만 기준으로 검색
+
+                    if is_tag_created:  # 새로 생성된 태그일 경우에만 slug 설정
                         tag.slug = slugify(t, allow_unicode=True)
+
+                        # 중복된 slug 방지 로직 추가
+                        original_slug = tag.slug
+                        count = 1
+                        while Tag.objects.filter(slug=tag.slug).exists():
+                            tag.slug = f"{original_slug}-{count}"
+                            count += 1
+
                         tag.save()
+
                     self.object.tags.add(tag)
-            return  response
+
+            return response
         else:
             return redirect('/blog/')
+
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
@@ -139,3 +149,8 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
                 self.object.tags.add(tag)
 
         return response
+
+def instant_logout(request):
+        """GET 요청만으로 즉시 로그아웃하는 뷰"""
+        logout(request)
+        return redirect('/blog')  # 로그아웃 후 홈으로 이동 (필요에 따라 변경 가능)

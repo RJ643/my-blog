@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load socialaccount %}
 <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="/">
@@ -21,6 +21,25 @@
                         <a class="nav-link" href="/blog/">Blog</a>
                     </li>
                 </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'instant_logout' %}">Log Out</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="loginModal">Log In</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
                 <!-- Log In 버튼 -->
                 <div class="d-flex align-items-center">
                     <a class="nav-link btn btn-outline-primary" href="#" role="button" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
@@ -38,9 +57,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-outline-dark btn-lg"><i class="fab fa-google"></i>&nbsp; Log in with Google</button>
-                        <button type="button" class="btn btn-outline-dark btn-lg"><i class="far fa-envelope"></i>&nbsp; Log in with E-mail</button>
-                        <button type="button" class="btn btn-outline-dark btn-lg"><i class="far fa-envelope"></i>&nbsp; Sign Up with E-mail</button>
+                        <a role ="button" class="btn btn-outline-dark btn-lg" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>&nbsp; Log in with Google</a>
+                        <a role ="button" class="btn btn-outline-dark btn-lg" href="/accounts/login/"><i class="far fa-envelope"></i>&nbsp&nbsp; Log in with Username</a>
+                        <a role ="button" class="btn btn-outline-dark btn-lg" href="/accounts/signup/"><i class="far fa-envelope"></i>&nbsp&nbsp; Sign Up with E-mail</a>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import instant_logout
 
 urlpatterns = [
     path('update_post/<int:pk>/', views.PostUpdate.as_view()),
@@ -8,4 +9,5 @@ urlpatterns = [
     path('category/<path:slug>/', views.category_page, name='category_page'),  # ✅ 변경: <slug:slug> → <path:slug>
     path('<int:pk>/', views.PostDetail.as_view(), name='post_detail'),
     path('', views.PostList.as_view(), name='post_list'),
+    path('instant-logout/', instant_logout, name='instant_logout'),
 ]
