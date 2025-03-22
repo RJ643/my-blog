@@ -27,6 +27,13 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             {% if user.socialaccount_set.all.first %}
+                                <img class="rounded-circle" width="25px" src="{{ user.socialaccount_set.all.first.get_avatar_url }}" alt="">
+                            {% else %}
+                                <!-- UI Avatars를 사용하여 아바타 이미지 표시 -->
+                                <img class="rounded-circle" width="25px" src="https://ui-avatars.com/api/?name={{ user.username }}&size=25&background=random&color=fff" alt="">
+                            {% endif %}
+                            &nbsp;
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

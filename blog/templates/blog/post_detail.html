@@ -91,13 +91,13 @@
                                     <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#"
                                        data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
                                 {% endif %}
-                                {% if post.comment_set.exists %}
-                                    {% for comment in post.comment_set.iterator %}
+                                {% if post.comment_set.all|length > 0 %}
+                                    {% for comment in post.comment_set.all %}
                                     <!-- Comment with nested comments-->
                                     <div class="d-flex mb-4" id="comment-{{ comment.pk }}">
                                         <!-- Parent comment-->
                                         <div class="flex-shrink-0">
-                                            <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                                            <img class="rounded-circle" src="{{ comment.get_avatar_url }}" alt="{{ comment.author }}" width="45px">
                                         </div>
                                         <div class="ms-3 w-100">
                                             <div class="d-flex justify-content-between">
