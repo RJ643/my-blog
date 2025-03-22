@@ -72,3 +72,19 @@
     padding: 6px 10px;  /* 항목 여백 조정 */
     font-size: 14px;    /* 글자 크기 조정 */
 }
+/* 검색 항목 스타일 */
+
+.search-info {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #007bff, #6610f2);
+    padding: 5px 10px;
+    border-radius: 8px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

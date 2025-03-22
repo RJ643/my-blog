@@ -9,11 +9,13 @@ from django.contrib.auth import logout
 from .models import Post, Category, Tag, Comment
 from .forms import CommentForm
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 
 # 📌 [1] 메인 페이지 (게시글 리스트)
 class PostList(ListView):
     model = Post
     ordering = '-pk'
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -198,3 +200,20 @@ def delete_comment(request, pk):
         return redirect(post.get_absolute_url())
     else:
         raise PermissionDenied
+
+class PostSearch(PostList):
+    paginate_by = None
+
+    def get_queryset(self):
+        q = self.kwargs['q']
+        post_list = Post.objects.filter(
+            Q(title__contains=q) | Q(tags__name__contains=q)
+        ).distinct()
+        return post_list
+
+    def get_context_data(self, **kwargs):
+        context= super(PostSearch, self).get_context_data()
+        q = self.kwargs['q']
+        context['search_info'] = f'검색어: {q} ({self.get_queryset().count()})건'
+
+        return context
