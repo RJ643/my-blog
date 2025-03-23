@@ -1,20 +1,190 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>개발자 달타냥입니다.</title>
+
+    <title>Chango</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <!-- 부트스트랩 CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'blog/css/chango1.css' %}" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{% static 'single_pages/css/about_me.css' %}" media='screen'>
+    <script src="https://kit.fontawesome.com/ef758eefd4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
-<nav>
-    <a href="/blog/">Blog</a>
-    <a href="/about_me/">About me</a>
-</nav>
+{% include 'blog/navbar.html' %}
 
-<h1>안녕하세요. 달타냥입니다</h1>
-<h2>이력</h2>
-<h2>Portfolio</h2>
-<h3>아직 공사중입니다. </h3>
+<section>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>안녕하세요. 지식창고의 오신 것을 환영합니다.</h2>
+                <br/>
+                <p class="lead">
+                    피아노를 언제나 배우고 싶고 좋아합니다.<br/>
+                    컴퓨터로 그래픽 작업을 하는걸 좋아하고 매일 산책을 즐깁니다.
+                </p>
 
+                <ul>
+                    <li>WORK EXPERIENCE</li>
+                    <ul>
+                        <li>Kani Doraku-Japanese Crab Restaurant (2019~2022)</li>
+                        <li>CGV- korean movie theater(2013~2014)</li>
+                    </ul>
+                    <li>EDUCATION</li>
+                    <ul>
+                        <li>
+                            Kasai university(Economics)-2019~2023 (completed course of two years)
+                        </li>
+                        <li>
+                             Bachelor's Degree Examination for Self-Education(Computer science)-2024
+                        </li>
+                    </ul>
+                    <li>License</li>
+                    <ul>
+                        <li>Engineer information Processing</li>
+                    </ul>
+                    <li>Language</li>
+                    <ul>
+                        <li>English[TOEIC-915] Japanese[JLPT-N1(170) Chinese[HSK4] German[A2]</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <img class="img-fluid" src="{% static 'single_pages/images/rion.jpg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light margin-for-footer" >
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>TRAVEL</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#italy2024">
+                    <img class="card-img-top" src="{% static 'single_pages/images/italy1.jpg' %}">
+                    <div class="card-body">
+                        <h5 class="card-title">이탈리아 여행 [Italy 2024]</h5>
+                        <p>이탈리아 로마의 바티칸과 콜로세움에 웅장함을 새삼 느꼈습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#japan2024">
+                    <img class="card-img-top" src="{% static 'single_pages/images/japan1.jpg' %}">
+                    <div class="card-body">
+                        <h5 class="card-title">일본 여행 [Japan 2024]</h5>
+                        <p>일본 오사카와 히로시마에서 맛있는 음식을 먹으며 여행을 하였습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#swiss2024">
+                    <img class="card-img-top" src="{% static 'single_pages/images/swiss1.jpg' %}">
+                    <div class="card-body">
+                        <h5 class="card-title">스위스 여행[Swiss 2024]</h5>
+                        <p>스위스의 아름다운 알프스를 마음껏 즐기며 구경함</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="italy2024" tabindex="-1" aria-labelledby="italy2024ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="italy2024ModalLabel">이탈리아 로마</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <img class="img-fluid" src="{% static 'single_pages/images/italy2.jpg' %}" alt="이탈리아 로마">
+                    </div>
+                    <div class="col-lg-5">
+                        <p style="white-space: pre-wrap;">이탈리아 로마에 3박 4일 머무르며 로마 시내와 바티칸을 다니며 기독교와 로마의 과거를 보았다.
+                            <br>로마는 참으로 볼 것이 많은 도시 이기는 하나 여행 하기에 좋은 도시는 아닌 것 같다.
+                            <br>약간의 불친절함과 인종차별이 어느정도 존재하는 도시이다
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="japan2024" tabindex="-1" aria-labelledby="japan2024ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="japan2024ModalLabel">일본 히로시마</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <img class="img-fluid" src="{% static 'single_pages/images/japan2.jpg' %}" alt="일본 히로시마">
+                    </div>
+                    <div class="col-lg-5">
+                        <p style="white-space: pre-wrap;">일본 히로시마에 유명한 크림빵 가게인 팔천당에 다녀왔다.
+                            <br>폭신폭신하면서도 깊이 있는 크림의 맛이 참 좋다.
+                            <br>팔천당은 히로시마 시내에도 있고 히로시마 공항 근처에는 맛있는 피자가 있는 레스토랑도 운영하고 있다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="swiss2024" tabindex="-1" aria-labelledby="swiss2024ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="swiss2024ModalLabel">스위스 알프스</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <img class="img-fluid" src="{% static 'single_pages/images/swiss2.jpg' %}" alt="스위스 알프스">
+                    </div>
+                    <div class="col-lg-5">
+                        <p style="white-space: pre-wrap;">스위스의 알프스 산맥을 기차를 타고 감상하는 베르니나 특급열차에서 볼 수 있는 가장 아름 다운 풍경의 사진이다.
+                        <br>스위스의 여러 아름다운 곳이 있지만 여기만큼 아름다운 곳은 없는 것 같다.
+                        <br>사진으로는 이 장관을 전부 담아낼 수 없다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fixed_bottom">
+    {% include 'blog/footer.html' %}
+</div>
 </body>
 </html>
