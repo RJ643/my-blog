@@ -60,6 +60,16 @@ class Post(models.Model):
     def get_content_markdown(self):
         return markdown(self.content)
 
+    def get_avatar_url(self):
+
+        if self.author is None:
+            return "/static/default-avatar.png"  # 기본 아바타 이미지 제공
+
+        if self.author.socialaccount_set.exists():
+            return self.author.socialaccount_set.first().get_avatar_url()
+        else:
+            return f'https://ui-avatars.com/api/?name={self.author.username}&size=45'
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

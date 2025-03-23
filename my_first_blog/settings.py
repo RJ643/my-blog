@@ -135,6 +135,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'blog/static'),  # 정적 파일 경로 추가
+    os.path.join(BASE_DIR, 'single_pages/static'),
 ]
 
 # Default primary key field type
