@@ -1,4 +1,4 @@
-FROM python:3.11-slim-buster
+FROM python:3.12-slim-bullseye
 
 # 작업 디렉토리 설정
 WORKDIR /app
