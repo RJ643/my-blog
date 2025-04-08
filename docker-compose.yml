@@ -10,12 +10,22 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./static:/code/static
+      - ./media:/code/media
+    depends_on:
+      - web
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ./static:/code/static
+      - ./media:/code/media
     ports:
       - "8000:8000"
     env_file:
@@ -25,3 +35,4 @@ services:
 
 volumes:
   postgres_data:
+

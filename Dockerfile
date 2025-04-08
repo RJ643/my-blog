@@ -22,3 +22,5 @@ COPY . .
 
 # 포트 설정 (장고 dev 서버용)
 EXPOSE 8000
+# 기존 runserver 대신 gunicorn 실행
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "my_first_blog.wsgi:application"]

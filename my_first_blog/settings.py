@@ -136,6 +136,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = '/code/static'  # Docker 컨테이너 안에서의 정적 파일 출력 디렉토리
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'blog/static'),  # 정적 파일 경로 추가
@@ -146,7 +148,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

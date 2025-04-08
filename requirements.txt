@@ -34,3 +34,4 @@ urllib3==2.3.0
 wcwidth==0.2.13
 psycopg2-binary>=2.9
 cryptography
+gunicorn
